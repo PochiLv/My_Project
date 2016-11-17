@@ -1,0 +1,115 @@
+btnNewButton.addActionListener(new ActionListener() {
+	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String str=textField.getText();
+				byte [] buf=str.getBytes();
+				int length =buf.length;
+				InetAddress ip = null;
+				
+				
+				try {
+					ip = InetAddress.getByName("192.168.1.100");
+				} catch (UnknownHostException e2) {
+					
+					e2.printStackTrace();
+				}
+				
+				textField.setText(null);
+//				textField_1.setText(str);
+				/*
+				 * 自己写一下
+				 */
+				//1.
+				DatagramSocket ds = null;
+				try {
+					ds = new DatagramSocket();
+				} catch (SocketException e1) {
+					
+					e1.printStackTrace();
+				}
+				//2.
+				DatagramPacket dp=new DatagramPacket(buf, length, ip, 15987);
+				//3.
+				try {
+					ds.send(dp);
+				} catch (IOException e1) {
+					
+					e1.printStackTrace();
+				}
+				//4.
+				ds.close();
+				
+			}
+		});
+		
+		
+		
+		
+		/*
+					 * 自己写的
+					 */
+					//1.
+					DatagramSocket ds=new DatagramSocket(15987);
+					//2.
+					byte[] buf=new byte[1024];
+					int length =buf.length;
+					DatagramPacket dp=new DatagramPacket(buf, length);
+					//3.
+					while (true) {
+						ds.receive(dp);
+						InetAddress ip=dp.getAddress();
+						String ip_str=ip.getHostAddress();
+						String cotent=new String(dp.getData(), dp.getData().length, length);
+						
+						textArea_1.append(ip_str+":"+cotent);
+						if (cotent.equals("886")) {
+							ds.close();
+							break;
+						}
+					}
+					
+					
+					
+		
+		
+		
+		
+		
+		
+		package com.pochi.gui.demo;
+
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+
+public class Recetest implements Runnable {
+	private DatagramSocket ds;
+	
+	public Recetest(DatagramSocket ds) {
+		super();
+		this.ds = ds;
+	}
+
+	@Override
+	public void run() {
+		byte[] buf=new byte[1024];
+		int length = buf.length;
+		DatagramPacket dp=new DatagramPacket(buf, length);
+		while (true) {
+			try {
+				ds.receive(dp);
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+			System.out.println(new String(buf, 0, length));
+			if (dp.getData().equals("886".getBytes())) {
+				ds.close();
+				break;
+			}
+		}
+	}
+
+}
+		
