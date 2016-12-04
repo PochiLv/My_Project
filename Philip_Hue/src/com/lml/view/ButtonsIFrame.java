@@ -27,6 +27,8 @@ public class ButtonsIFrame extends JFrame {
 		public void actionPerformed(final ActionEvent e) {
 			try {
 				service.summer_switchon("1");
+				service.summer_switchon("2");
+				service.summer_switchon("3");
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
@@ -37,6 +39,9 @@ public class ButtonsIFrame extends JFrame {
 		public void actionPerformed(final ActionEvent e) {
 			try {
 				service.switchoff("1");
+				service.switchoff("2");
+				service.switchoff("3");
+
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
@@ -46,7 +51,7 @@ public class ButtonsIFrame extends JFrame {
 	class UpAction implements ActionListener {
 		public void actionPerformed(final ActionEvent e) {
 			try {
-				service.summer_dawn("1");
+				service.sum_multi_dawn();
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
@@ -56,7 +61,7 @@ public class ButtonsIFrame extends JFrame {
 	class DownAction implements ActionListener {
 		public void actionPerformed(final ActionEvent e) {
 			try {
-				service.summer_fade("1");
+				service.sum_multi_fade();
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
@@ -87,7 +92,7 @@ public class ButtonsIFrame extends JFrame {
 		borderLayout.setVgap(10);
 		getContentPane().setLayout(borderLayout);
 		setTitle("按钮体验");
-		setBounds(650, 200, 900, 500);
+		setBounds(560, 150, 900, 500);
 		// setVisible(false);
 		ImageIcon background = CreatedIcon.add("button.jpg");
 		JLabel backgroundp = new JLabel(background);// 把背景图片显示在一个标签里面

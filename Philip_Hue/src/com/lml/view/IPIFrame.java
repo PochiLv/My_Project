@@ -19,6 +19,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
+import com.lml.service.BusinessService;
 import com.lml.util.CreatedIcon;
 import com.lml.util.PropertiesUtil;
 
@@ -35,6 +36,10 @@ public class IPIFrame extends JFrame {
 				JOptionPane.showMessageDialog(null, "请输入灯组的IP地址");
 			} else {
 				try {
+					BusinessService businessService = new BusinessService();
+					if(PropertiesUtil.getValue("token")==null||PropertiesUtil.getValue("token").equals("")){
+						businessService.get_token(str_ip);
+					}
 					PropertiesUtil.writeProperties("ip", str_ip);
 					ButtonsIFrame frame = new ButtonsIFrame();
 					frame.setVisible(true);
@@ -53,7 +58,7 @@ public class IPIFrame extends JFrame {
 		borderLayout.setVgap(10);
 		getContentPane().setLayout(borderLayout);
 		setTitle("登录");
-		setBounds(670, 200, 900, 500);
+		setBounds(560, 150, 900, 500);
 		// setVisible(false);
 		ImageIcon background = CreatedIcon.add("IP2.jpg");
 		JLabel backgroundp = new JLabel(background);// 把背景图片显示在一个标签里面

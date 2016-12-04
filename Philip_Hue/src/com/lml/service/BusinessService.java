@@ -3,7 +3,6 @@ package com.lml.service;
 import com.lml.baseOp.BaseOperation;
 import com.lml.model.Light;
 import com.lml.model.Linght_State;
-import com.lml.util.HttpRequest;
 import com.lml.util.PropertiesUtil;
 
 public class BusinessService {
@@ -124,7 +123,7 @@ public class BusinessService {
 	private Light getWinLight() {
 		Light light = new Light();
 		Linght_State state = light.getState();
-		String filePath = "./src/winter.properties";
+		String filePath = "src/winter.properties";
 		String sat = PropertiesUtil.readValue(filePath, "sat");
 		String hue = PropertiesUtil.readValue(filePath, "hue");
 		state.setHue(Integer.parseInt(hue));
@@ -141,7 +140,7 @@ public class BusinessService {
 	private Light getSumLight() {
 		Light light = new Light();
 		Linght_State state = light.getState();
-		String filePath = "./src/summer.properties";
+		String filePath = "src/summer.properties";
 		String sat = PropertiesUtil.readValue(filePath, "sat");
 		String hue = PropertiesUtil.readValue(filePath, "hue");
 		state.setHue(Integer.parseInt(hue));
@@ -166,5 +165,51 @@ public class BusinessService {
 		sumLight.getState().setOn(true);
 		baseOperation.change_state(sumLight);
 	}
+	//三组渐亮
+	public void sum_multi_dawn() throws Exception{
+		Light light1 = getSumLight();
+		light1.setId("1");
+		light1.getState().setOn(true);
+		Light light2 = getSumLight();
+		light2.setId("2");
+		light2.getState().setOn(true);
+		Light light3 = getSumLight();
+		light3.setId("3");
+		light3.getState().setOn(true);
+		
+		for (int i = 0; i < 101; i++) {
+			light1.getState().setBri(i);
+			baseOperation.change_state(light1);
+			light2.getState().setBri(i);
+			baseOperation.change_state(light2);
+			light3.getState().setBri(i);
+			baseOperation.change_state(light3);
+			Thread.sleep(20);
+		}
+		
+	}
+	
+	//三组渐暗
+		public void sum_multi_fade() throws Exception{
+			Light light1 = getSumLight();
+			light1.setId("1");
+			light1.getState().setOn(true);
+			Light light2 = getSumLight();
+			light2.setId("2");
+			light2.getState().setOn(true);
+			Light light3 = getSumLight();
+			light3.setId("3");
+			light3.getState().setOn(true);
+			for (int i = 100; i >-1; i--) {
+				light1.getState().setBri(i);
+				baseOperation.change_state(light1);
+				light2.getState().setBri(i);
+				baseOperation.change_state(light2);
+				light3.getState().setBri(i);
+				baseOperation.change_state(light3);
+				Thread.sleep(20);
+			}
+			
+		}
 
 }

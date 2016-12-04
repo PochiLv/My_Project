@@ -46,4 +46,14 @@ public class TestBusiness {
 		BusinessService businessService = new BusinessService();
 		businessService.summer_switchon("3");
 	}
+	@Test
+	public void testSum_Mutil_Dawn() throws Exception{
+		BusinessService businessService = new BusinessService();
+		businessService.sum_multi_dawn();
+	}
+	@Test
+	public void testSum_Mutil_Fade() throws Exception{
+		BusinessService businessService = new BusinessService();
+		businessService.sum_multi_fade();
+	}
 }

@@ -11,7 +11,7 @@ import java.util.Properties;
 
 public class PropertiesUtil {
 	// 属性文件的路径
-	static String filePath = "./src/param.properties";
+	static String filePath = "src/param.properties";
 	/**
 	 * 采用静态方法
 	 */
