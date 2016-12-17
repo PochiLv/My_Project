@@ -1,0 +1,36 @@
+body{
+	width:800px;
+	height:650px;
+	text-align:center;
+	margin:0 auto;
+/* 	border: 1px solid black; */
+
+}
+.text_input{
+	width:100px;
+	margin-left:15px;
+}
+.div_input{
+	margin: 20px;
+	
+}
+select{
+	margin-left:7px;
+	width: 106px;
+}
+#submit{
+	float:left;
+	margin-left:75px;
+}
+#reset{
+	float:left;
+}
+.all{
+	margin-top:30px;
+	margin-left:270px;
+	width:250px;
+	height:350px;
+	/* border: 1px solid silver; */
+	background:silver;
+	padding:15px;
+}
